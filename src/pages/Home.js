@@ -8,10 +8,33 @@ import photoSoft from "../pages/nand.jpg";
 import phLogin from "../pages/loginimg.png";
 import Inscription from "./Inscription";
 import SignUpForm from "./SignUpForm";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [show, setShow] = useState(false);
   const [fliping, setFliping] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/api/message", {
+        pseudo: name,
+        email,
+        message,
+      });
+      if (response) {
+        toast.success("Message envoyé");
+      }
+    } catch (error) {
+      toast.error("Error lors de l'envoie du message");
+    }
+  };
+
   const showHandlder = () => {
     setShow(true);
   };
@@ -35,8 +58,9 @@ const Home = () => {
         <h1>Devenez un Pro technicien en réparation Smartphones</h1>
         <p>
           Vous voulez vous former à la réparation de smartphones! Vous êtes
-          débutants ou réparateurs et vous voulez améliorer vos connaissances en réparation de smartphones,nous vous
-          proposons une formation 100% en ligne en réparation de téléphones mobiles.
+          débutants ou réparateurs et vous voulez améliorer vos connaissances en
+          réparation de smartphones,nous vous proposons une formation 100% en
+          ligne en réparation de téléphones mobiles.
         </p>
       </div>
 
@@ -112,31 +136,40 @@ const Home = () => {
           </div>
 
           <div className="contactForm">
-            <form>
+            <form onSubmit={handleSubmit}>
               <h2>Envoyer un message</h2>
 
               <div className="inputBox+">
-                <input className="innerContact"
+                <input
+                  className="innerContact"
                   type="text"
                   name=""
                   required="required"
                   placeholder="Nom et Prénom"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
               <div className="inputBox+">
-                <input className="innerContact"
+                <input
+                  className="innerContact"
                   type="text"
                   name=""
                   required="required"
                   placeholder="E-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
               <div className="inputBox+">
-                <textarea className="innerContact"
+                <textarea
+                  className="innerContact"
                   required="required"
                   placeholder="Taper votre message..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                 />
               </div>
 
@@ -206,13 +239,11 @@ const Home = () => {
           </div>
         </div>
 
-        
-      {/* Quatriemme Page //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-<div className="container4">
-
-<Inscription/>
-</div>
-{/* 
+        {/* Quatriemme Page //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+        <div className="container4">
+          <Inscription />
+        </div>
+        {/* 
         <div className="container4">
           <div className="phconnexion">
             <img className="logimg" src={phLogin} />

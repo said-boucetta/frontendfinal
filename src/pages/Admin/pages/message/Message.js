@@ -27,10 +27,9 @@ export default function UserList() {
     },
     { field: "email", headerName: "Email", width: 200 },
     {
-      field: "action",
+      field: "message",
       headerName: "Message",
       width: 900,
-
     },
   ];
 

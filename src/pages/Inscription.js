@@ -3,42 +3,31 @@ import "./Inscription.css";
 import phLogin from "../pages/loginimg.png";
 import axios from "axios";
 import SignUpForm from "./SignUpForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Inscription = () => {
   const [fliping, setFliping] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const emailError = document.querySelector(".email.error");
-    const passwordError = document.querySelector(".password.error");
-
-    axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/login`,
-      withCredentials: true,
-      data: {
-        email,
-        password,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-        } else {
-          window.location = "/";
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/user/login",
+        {
+          email,
+          password,
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
+      if (response) {
+        toast.success("Vous etes connecté");
+      }
+    } catch (error) {
+      toast.error("Erreur lors de la connexion");
+    }
   };
-
-  
-    
 
   return (
     <div className="container5">
@@ -52,7 +41,8 @@ const Inscription = () => {
             <form action="" onSubmit={handleLogin} id="sign-up-form">
               <label htmlFor="email">Email</label>
               <br />
-              <input className="input-bo "
+              <input
+                className="input-bo "
                 type="text"
                 name="email"
                 id="email"
@@ -62,15 +52,20 @@ const Inscription = () => {
               <br />
               <label htmlFor="password">Mot de passe</label>
               <br />
-              <input className="input-bo "
+              <input
+                className="input-bo "
                 type="password"
                 name="password"
                 id="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
-              <input id="sub" className="submit-btn" type="submit" value="Se connecter" />
-            
+              <input
+                id="sub"
+                className="submit-btn"
+                type="submit"
+                value="Se connecter"
+              />
             </form>
             <button
               type="button"
@@ -82,13 +77,12 @@ const Inscription = () => {
             >
               Je m'inscris
             </button>
-          
           </div>
 
           <div className="card-back">
             <h2>Inscription</h2>
-<SignUpForm/>
-            <button 
+            <SignUpForm />
+            <button
               type="button"
               className="deja"
               onClick={(e) => {
@@ -101,6 +95,17 @@ const Inscription = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
     //   <div className="container5">
     //   <div className="phLogin">
@@ -183,5 +188,4 @@ const Inscription = () => {
     // </div>
   );
 };
-const rootElement = document.getElementById("root");
 export default Inscription;
