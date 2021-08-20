@@ -1,0 +1,60 @@
+.videosidebar {
+  flex: 1;
+  height: calc(100vh - 50px);
+  background-color: rgb(236, 236, 236);
+  position: sticky;
+  top: 50px;
+  margin-right: 3px;
+}
+
+.videoheadersidbar {
+  margin-bottom: 10px;
+  background-color: rgb(5, 0, 82);
+  background-size: cover;
+  padding-left: auto;
+  padding-right: auto;
+  font-size: 20px;
+  padding:1px ;
+  color: rgb(236, 236, 236);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  align-items: center;
+}
+
+.videoheadersidbar h3 {
+  text-align: center;
+}
+
+.videolevelsidbar {
+  background-color: rgb(221, 81, 0);
+  background-size: cover;
+  padding: 10px auto;
+  font-size: 20px;
+  color: rgb(236, 236, 236);
+  margin-right: 150px;
+  align-items: center;
+  border-top-right-radius: 20px;
+  margin-bottom: 5 px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.videolevelsidbar h3 {
+  text-align: center;
+}
+.videocourssidbar ul {
+  display: contents;
+}
+.videocourssidbar li {
+  margin-left: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+.videocourssidbar {
+  height: 540px;
+  overflow: hidden;
+}

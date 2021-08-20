@@ -1,0 +1,19 @@
+.hreff {
+  display: flex;
+  color: aliceblue;
+  text-decoration: none;
+  font-size: 15px;
+  position: relative;
+  top: 10px;
+
+}
+
+.accepte {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-box2 {
+
+}
