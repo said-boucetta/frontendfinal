@@ -3,6 +3,7 @@ import "./Inscription.css";
 import phLogin from "../pages/loginimg.png";
 import axios from "axios";
 import SignUpForm from "./SignUpForm";
+import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,7 +11,7 @@ const Inscription = () => {
   const [fliping, setFliping] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -21,8 +22,14 @@ const Inscription = () => {
           password,
         }
       );
+      console.log(response);
       if (response) {
         toast.success("Vous etes connecté");
+        if (response.data?.user?.role == "admin") {
+          history.push("/admin");
+        } else {
+          history.push("/video");
+        }
       }
     } catch (error) {
       toast.error("Erreur lors de la connexion");
